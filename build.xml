@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<project name="guiders-gwt" basedir="." default="jar">
+
+	<property name="src.dir" value="src" />
+	<property name="build.dir" value="war/WEB-INF/classes" />
+	<property name="lib.dir" location="war/WEB-INF/lib" />
+	<property name="jar.name" value="guiders-gwt.jar" />
+
+	<path id="project.classpath">
+		<fileset dir="${lib.dir}">
+			<include name="**/*.jar"/>
+		</fileset>
+		<pathelement location="${build.dir}" />
+	</path>
+
+	<target name="prepare">
+		<mkdir dir="${build.dir}" />
+	</target>
+
+	<target name="clean">
+		<delete dir="${build.dir}"/>
+	</target>
+
+	<target name="compile" depends="prepare">
+		<javac srcdir="${src.dir}" destdir="${build.dir}">
+			<classpath refid="project.classpath"/>
+		</javac>
+	</target>
+
+	<target name="gwt-compile" depends="compile">
+		<java failonerror="true" fork="true" classname="com.google.gwt.dev.Compiler">
+			<classpath>
+				<!-- src dir is added to ensure the module.xml file(s) are on the classpath -->
+				<pathelement location="${src.dir}"/>    
+				<pathelement location="${build.dir}"/>
+				<path refid="project.classpath"/>
+			</classpath>
+			<jvmarg value="-Xmx512M"/>
+			<arg value="-localWorkers"/>
+			<arg value="2"/>
+			<arg value="${gwt.module.name}"/>
+		</java>
+	</target>
+
+	<target name="jar" depends="gwt-compile">
+		<jar jarfile="${jar.name}" basedir="${build.dir}"/>
+	</target>
+
+</project>
