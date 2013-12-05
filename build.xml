@@ -1,6 +1,8 @@
 <?xml version="1.0"?>
-<project name="guiders-gwt" basedir="." default="jar">
+<project name="guiders-gwt" basedir="." default="cleanAndJar">
 
+	<property name="gwt.module.name" value="com.github.fibbers.guidersgwt.GuidersGwt" />
+	<property name="resources.dir" value="com/github/fibbers/guidersgwt/client/ui/resources" />
 	<property name="src.dir" value="src" />
 	<property name="build.dir" value="war/WEB-INF/classes" />
 	<property name="lib.dir" location="war/WEB-INF/lib" />
@@ -25,6 +27,9 @@
 		<javac srcdir="${src.dir}" destdir="${build.dir}">
 			<classpath refid="project.classpath"/>
 		</javac>
+		<copy todir="${build.dir}/${resources.dir}">
+			<fileset dir="${src.dir}/${resources.dir}" />
+		</copy>
 	</target>
 
 	<target name="gwt-compile" depends="compile">
@@ -45,5 +50,7 @@
 	<target name="jar" depends="gwt-compile">
 		<jar jarfile="${jar.name}" basedir="${build.dir}"/>
 	</target>
+
+	<target name="cleanAndJar" depends="clean, jar" />
 
 </project>

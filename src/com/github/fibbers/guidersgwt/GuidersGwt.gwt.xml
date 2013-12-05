@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module rename-to='guidersgwt'>
+	<inherits name='com.google.gwt.user.User' />
+	<inherits name="com.github.fibbers.guidersgwt.client.ui.Resources"/>
+	<entry-point class='com.github.fibbers.guidersgwt.client.GuidersGwt' />
+	<source path='client' />
+</module>
