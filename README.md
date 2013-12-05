@@ -3,6 +3,17 @@ guiders-gwt
 
 GWT version of https://github.com/jeff-optimizely/Guiders-JS
 
+Requirements
+=
+
+The same requirements apply as for Guiders-JS itself (jQuery), in addition to the jars required to compile the GWT code.
+
+That is:
+<pre>
+war/WEB-INF/lib/gwt-user.jar
+war/WEB-INF/lib/gwt-dev.jar
+</pre>
+
 Building
 =
 
